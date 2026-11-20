@@ -7,7 +7,7 @@
 **Seis juegos cortos para entrenar la atención.**
 Un proyecto del semillero de psicología.
 
-### [▶ Abrir CogniBrain](https://cognibrain.vercel.app)
+### [Abrir CogniBrain](https://cognibrain.vercel.app)
 
 https://cognibrain.vercel.app
 
