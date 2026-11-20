@@ -11,6 +11,33 @@ function isEntry(entry) {
   )
 }
 
+export function entryProfile(entry) {
+  return typeof entry.profile === 'string' ? entry.profile : ''
+}
+
+export function profileEntries(history, profile) {
+  return history.filter((entry) => entryProfile(entry) === profile)
+}
+
+function writeHistory(list) {
+  try {
+    window.localStorage.setItem(HISTORY_KEY, JSON.stringify(list))
+    return true
+  } catch {
+    return false
+  }
+}
+
+function limitPerProfile(list) {
+  const counts = new Map()
+  return list.filter((entry) => {
+    const key = entryProfile(entry)
+    const count = (counts.get(key) || 0) + 1
+    counts.set(key, count)
+    return count <= HISTORY_LIMIT
+  })
+}
+
 export function isStorageAvailable() {
   try {
     const probe = `${HISTORY_KEY}:probe`
@@ -33,27 +60,19 @@ export function readHistory() {
   }
 }
 
-export function saveResult(game, result) {
-  try {
-    const entry = {
-      gameId: game.id,
-      gameTitle: game.title,
-      date: new Date().toISOString(),
-      items: result.items.map(({ value, label }) => ({ value, label })),
-    }
-    const next = [entry, ...readHistory()].slice(0, HISTORY_LIMIT)
-    window.localStorage.setItem(HISTORY_KEY, JSON.stringify(next))
-    return next
-  } catch {
-    return null
+export function saveResult(game, result, profile = '') {
+  const entry = {
+    gameId: game.id,
+    gameTitle: game.title,
+    date: new Date().toISOString(),
+    profile,
+    items: result.items.map(({ value, label }) => ({ value, label })),
   }
+  const next = limitPerProfile([entry, ...readHistory()])
+  return writeHistory(next) ? next : null
 }
 
-export function clearHistory() {
-  try {
-    window.localStorage.removeItem(HISTORY_KEY)
-    return true
-  } catch {
-    return false
-  }
+export function clearHistory(profile = '') {
+  const next = readHistory().filter((entry) => entryProfile(entry) !== profile)
+  return writeHistory(next) ? next : null
 }

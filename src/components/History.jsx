@@ -16,7 +16,7 @@ function formatDate(iso) {
   return Number.isNaN(date.getTime()) ? '' : dateFormat.format(date)
 }
 
-export default function History({ entries, available, onClear }) {
+export default function History({ entries, available, onClear, profileName }) {
   const [confirming, setConfirming] = useState(false)
   const [visible, setVisible] = useState(PAGE)
   const shown = entries.slice(0, visible)
@@ -31,7 +31,9 @@ export default function History({ entries, available, onClear }) {
     <section className="history" aria-labelledby="history-title">
       <div className="history-head">
         <div>
-          <h2 className="history-title" id="history-title">Mis resultados</h2>
+          <h2 className="history-title" id="history-title">
+            {profileName ? `Mis resultados · ${profileName}` : 'Mis resultados'}
+          </h2>
           <p className="history-note">
             {available
               ? 'Se guardan solo en este dispositivo y en este navegador. No se guarda tu nombre ni otros datos personales.'

@@ -1,5 +1,7 @@
+import { entryProfile } from './storage.js'
+
 const SEPARATOR = ';'
-const HEADER = ['Fecha', 'Hora', 'Juego', 'Métrica', 'Valor', 'Total', 'Unidad']
+const HEADER = ['Participante', 'Fecha', 'Hora', 'Juego', 'Métrica', 'Valor', 'Total', 'Unidad']
 
 function pad(n) {
   return String(n).padStart(2, '0')
@@ -34,7 +36,7 @@ export function historyToCsv(entries) {
   entries.forEach((entry) => {
     const [day, time] = splitDate(entry.date)
     entry.items.forEach((item) => {
-      rows.push([day, time, entry.gameTitle, item.label, ...splitValue(item.value)])
+      rows.push([entryProfile(entry), day, time, entry.gameTitle, item.label, ...splitValue(item.value)])
     })
   })
   return rows.map((row) => row.map(escapeCell).join(SEPARATOR)).join('\r\n')
