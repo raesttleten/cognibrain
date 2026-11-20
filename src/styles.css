@@ -73,6 +73,21 @@ button {
   border-radius: var(--radius-card);
 }
 
+.header-start {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.seedbed-logo {
+  display: block;
+  flex-shrink: 0;
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -1114,6 +1129,14 @@ button {
 
   .brand-name {
     font-size: 19px;
+  }
+
+  .header-start {
+    gap: 10px;
+  }
+
+  .seedbed-logo {
+    height: 36px;
   }
 
   .btn-nav {
