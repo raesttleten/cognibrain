@@ -15,7 +15,7 @@ https://cognibrain.vercel.app
 
 ![Pantalla de inicio de CogniBrain](docs/inicio-con-perfil.png)
 
-CogniBrain es una página web con seis juegos breves que ejercitan distintas formas de atención y memoria. Cada partida dura unos pocos minutos y termina con una pantalla de resultados: aciertos, errores y tiempos de reacción.
+CogniBrain es una página web con seis juegos breves que ejercitan distintas formas de atención y memoria. Cada partida dura unos pocos minutos y termina con una pantalla de resultados de aciertos, errores y tiempos de reacción.
 
 No hace falta crear una cuenta, poner contraseña ni instalar nada: se abre [cognibrain.vercel.app](https://cognibrain.vercel.app), se escribe un apodo o código y se juega.
 
